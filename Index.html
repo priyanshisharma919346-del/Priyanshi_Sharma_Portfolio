@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priyanshi Sharma | AI Engineer</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --surface: #0e1c2d;
+      --surface-light: #142940;
+      --text: #f5f8ff;
+      --muted: #aab9ca;
+      --primary: #64d8cb;
+      --secondary: #8fa3ff;
+      --accent: #ffc857;
+      --border: rgba(255, 255, 255, 0.13);
+      --max-width: 1180px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(100, 216, 203, 0.16), transparent 35%),
+        radial-gradient(circle at 90% 5%, rgba(143, 163, 255, 0.16), transparent 32%),
+        var(--bg);
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin: auto;
+    }
+    .section {
+      padding: 90px 0;
+    }
+    .eyebrow {
+      color: var(--primary);
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+    h1, h2, h3 {
+      line-height: 1.15;
+    }
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: -0.07em;
+    }
+    h1 span {
+      color: var(--primary);
+    }
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 35px;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    p {
+      color: var(--muted);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(7, 17, 31, 0.86);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+    .logo span {
+      color: var(--primary);
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .menu-button {
+      display: none;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 55px;
+      align-items: center;
+    }
+    .hero-description {
+      max-width: 720px;
+      font-size: 1.16rem;
+      margin-top: 24px;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+    }
+    .button:hover {
+      transform: translateY(-3px);
+    }
+    .button-primary {
+      color: #06121d;
+      background: var(--primary);
+    }
+    .button-secondary {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .hero-card {
+      min-height: 390px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(145deg, rgba(100, 216, 203, 0.2), transparent 45%),
+        linear-gradient(320deg, rgba(143, 163, 255, 0.2), transparent 50%),
+        var(--surface);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .orbit {
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(100, 216, 203, 0.55);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 40px auto;
+      position: relative;
+    }
+    .orbit::before, .orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(143, 163, 255, 0.4);
+      border-radius: 50%;
+    }
+    .orbit::before { inset: 18px -24px; transform: rotate(30deg); }
+    .orbit::after { inset: -22px 25px; transform: rotate(-30deg); }
+    .initials {
+      color: var(--primary);
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -0.12em;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stats strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.3rem;
+    }
+    .hero-stats small {
+      color: var(--muted);
+    }
+    .panel, .project-card, .education-card, .timeline-card, .contact-box {
+      background: rgba(14, 28, 45, 0.86);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    }
+    .panel { padding: 28px; }
+    .panel p + p { margin-top: 16px; }
+    .two-column {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 25px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .skill-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+    }
+    .skill-card h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .skill-card p {
+      font-size: 0.92rem;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .tag {
+      padding: 7px 11px;
+      border: 1px solid rgba(100, 216, 203, 0.25);
+      border-radius: 999px;
+      color: #d8fffa;
+      background: rgba(100, 216, 203, 0.1);
+      font-size: 0.8rem;
+    }
+    .timeline {
+      display: grid;
+      gap: 22px;
+    }
+    .timeline-card {
+      padding: 27px;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 22px 22px 0;
+    }
+    .timeline-card h3 { margin-bottom: 5px; }
+    .date {
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 15px;
+      font-size: 0.92rem;
+    }
+    ul { padding-left: 21px; color: var(--muted); }
+    li + li { margin-top: 9px; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+    .project-card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 17px;
+      transition: 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(100, 216, 203, 0.65);
+    }
+    .project-number {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: #06121d;
+      background: var(--primary);
+      font-weight: 900;
+    }
+    .project-card h3 { font-size: 1.35rem; }
+    .label {
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .project-card p { font-size: 0.94rem; }
+    .repository-link {
+      display: inline-flex;
+      margin-top: auto;
+      color: var(--primary);
+      font-weight: 900;
+      word-break: break-word;
+    }
+    .repository-link:hover { color: var(--accent); }
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .education-card { padding: 25px; }
+    .education-card h3 { margin-bottom: 10px; }
+    .contact-box {
+      padding: 55px 25px;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(100, 216, 203, 0.13), rgba(143, 163, 255, 0.13)),
+        var(--surface);
+    }
+    .contact-box h2 { margin-bottom: 15px; }
+    .contact-buttons { justify-content: center; }
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      padding: 28px 0;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 850px) {
+      .hero-grid, .two-column { grid-template-columns: 1fr; }
+      .projects-grid, .education-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 25px, var(--max-width)); }
+      .section { padding: 65px 0; }
+      .menu-button { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px; left: 12px; right: 12px;
+        padding: 18px;
+        flex-direction: column;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+      .nav-links.open { display: flex; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .buttons { flex-direction: column; }
+      .button { width: 100%; }
+      h1 { font-size: 3.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">Priyanshi<span>.</span></a>
+        <button class="menu-button" id="menuButton">Menu</button>
+        <div class="nav-links" id="navLinks">
+          <a href="#about">Profile</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">AI Engineer Portfolio</div>
+          <h1>Priyanshi <span>Sharma</span></h1>
+          <p class="hero-description">
+            AI Engineer specializing in Generative AI, production RAG pipelines, multi-agent orchestration, FastAPI deployment, Python, SQL and data analytics.
+          </p>
+          <div class="buttons">
+            <a class="button button-primary" href="mailto:priyanshisharma919346@gmail.com">Email Me</a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/priyanshi-sharma-62730b252/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="button button-secondary" href="https://github.com/priyanshisharma919346-del/Priya" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div>
+            <div class="eyebrow">Focus Areas</div>
+            <div class="orbit">
+              <div class="initials">PS</div>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div><strong>RAG</strong><small>AI Systems</small></div>
+            <div><strong>Python</strong><small>Applications</small></div>
+            <div><strong>SQL</strong><small>Analytics</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="eyebrow">Profile</div>
+        <h2>Building practical AI and data solutions.</h2>
+        <div class="two-column">
+          <div class="panel">
+            <p>
+              Priyanshi Sharma is an MCA candidate at Amity University, pursuing the final semester of the 2025–2027 program.
+              She is an AI Engineer focused on Generative AI, production RAG pipelines, multi-agent orchestration, FastAPI, Python, SQL and data analytics.
+            </p>
+            <p>
+              She builds enterprise data-extraction tools with Azure OpenAI, Python, SQL and vector databases, including Pinecone and ChromaDB.
+            </p>
+          </div>
+          <div class="panel">
+            <div class="skills-grid">
+              <div class="skill-card">
+                <h3>AI & Orchestration</h3>
+                <p>Generative AI, RAG architecture, LangChain, LangGraph and Azure OpenAI.</p>
+              </div>
+              <div class="skill-card">
+                <h3>Data & Retrieval</h3>
+                <p>Pinecone, ChromaDB, Python, SQL, Pandas and MySQL.</p>
+              </div>
+              <div class="skill-card">
+                <h3>Application Development</h3>
+                <p>FastAPI, REST APIs and Streamlit.</p>
+              </div>
+              <div class="skill-card">
+                <h3>Automation & Delivery</h3>
+                <p>Playwright, Docker, AWS, Azure, Git and GitHub.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="eyebrow">Technical Skills</div>
+        <h2>Tools and technologies.</h2>
+        <div class="panel">
+          <div class="tag-list">
+            <span class="tag">Python</span>
+            <span class="tag">Java</span>
+            <span class="tag">SQL</span>
+            <span class="tag">RAG Architecture</span>
+            <span class="tag">Large Language Models</span>
+            <span class="tag">Azure OpenAI</span>
+            <span class="tag">LangChain</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">Multi-Agent Systems</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Pinecone</span>
+            <span class="tag">ChromaDB</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">Seaborn</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Playwright</span>
+            <span class="tag">ETL Pipelines</span>
+            <span class="tag">Docker</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Azure</span>
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="eyebrow">Professional Experience</div>
+        <h2>Experience in AI, automation and analytics.</h2>
+        <div class="timeline">
+          <article class="timeline-card">
+            <h3>Data & AI Analyst | Reckitt</h3>
+            <div class="date">July 2024 – April 2026</div>
+            <ul>
+              <li>Automated Azure OpenAI data pipelines for 5+ brand campaigns, saving 15+ hours weekly and reducing report-generation time by 40%.</li>
+              <li>Engineered context-aware RAG pipelines with Python, LangChain and Pinecone, enabling sub-second document queries with 95% retrieval accuracy across 10,000+ files.</li>
+              <li>Optimized marketing analytics workflows with Python ETL scripts and SQL queries, increasing lead-conversion tracking accuracy by 25%.</li>
+              <li>Built and deployed interactive Streamlit and FastAPI dashboards for 20+ active users, improving log-diagnostic speed by 30%.</li>
+            </ul>
+          </article>
+          <article class="timeline-card">
+            <h3>Process & Data Executive | StarTek-Aegis</h3>
+            <div class="date">November 2022 – March 2024</div>
+            <ul>
+              <li>Analyzed and structured 5,000+ daily operational SQL records; performed root-cause log diagnostics that reduced data-pipeline errors by 35%.</li>
+              <li>Built automated inventory-tracking models in SQL, cutting daily process-reporting preparation time from 120 minutes to 20 minutes.</li>
+              <li>Designed standardized cross-functional data-reporting workflows, increasing operational-report accuracy by 18% and accelerating turnaround by 25%.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="eyebrow">Selected Projects</div>
+        <h2>Featured work and case studies.</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-number">01</div>
+            <h3>Enterprise RAG AI Assistant & Semantic Document Search</h3>
+            <div>
+              <div class="label">Summary</div>
+              <p>An end-to-end Retrieval-Augmented Generation application for querying unstructured PDF and document content and generating context-aware responses using vector embeddings and large language models.</p>
+            </div>
+            <div>
+              <div class="label">Workflow</div>
+              <p>Ingests complex PDF documents, splits text into semantic chunks, generates dense embeddings, stores them in ChromaDB or FAISS, performs k-NN semantic retrieval and provides a Streamlit question-answering interface.</p>
+            </div>
+            <div>
+              <div class="label">Technology</div>
+              <div class="tag-list">
+                <span class="tag">Python</span>
+                <span class="tag">LangChain</span>
+                <span class="tag">LlamaIndex</span>
+                <span class="tag">OpenAI</span>
+                <span class="tag">HuggingFace</span>
+                <span class="tag">ChromaDB</span>
+                <span class="tag">FAISS</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Streamlit</span>
+                <span class="tag">PyPDF2</span>
+              </div>
+            </div>
+            <div>
+              <div class="label">Result</div>
+              <p>Accelerated information extraction from dense corporate documents by up to 35%.</p>
+            </div>
+            <a class="repository-link" href="https://github.com/priyanshisharma919346-del/Priya" target="_blank" rel="noopener">View Code Repository →</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-number">02</div>
+            <h3>Automated Web Data Scraper & Analytics Dashboard</h3>
+            <div>
+              <div class="label">Summary</div>
+              <p>Developed automated web scrapers with Playwright and Python to ingest more than 20,000 daily records into MySQL and support an analytics workflow.</p>
+            </div>
+            <div>
+              <div class="label">Technology</div>
+              <div class="tag-list">
+                <span class="tag">Python</span>
+                <span class="tag">Playwright</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Data Analytics</span>
+              </div>
+            </div>
+            <div>
+              <div class="label">Result</div>
+              <p>Improved market-data refresh rates by 50%.</p>
+            </div>
+            <span class="repository-link">Repository link not provided yet</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container">
+        <div class="eyebrow">Education & Training</div>
+        <h2>Academic background and certifications.</h2>
+        <div class="education-grid">
+          <article class="education-card">
+            <h3>Master of Computer Applications</h3>
+            <div class="date">Amity University | 2025–2027</div>
+            <p>Pursuing final semester. Score: 80%.</p>
+          </article>
+          <article class="education-card">
+            <h3>Bachelor of Computer Applications</h3>
+            <div class="date">School of Management Sciences | 2019–2022</div>
+            <p>Foundation in computer applications and software development.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div class="eyebrow">Get In Touch</div>
+          <h2>Let’s connect for AI and data opportunities.</h2>
+          <p>Gurugram / Delhi NCR, India</p>
+          <p>Phone: +91-9193462795</p>
+          <div class="buttons contact-buttons">
+            <a class="button button-primary" href="mailto:priyanshisharma919346@gmail.com">Email</a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/priyanshi-sharma-62730b252/" target="_blank" rel="noopener">LinkedIn Profile</a>
+            <a class="button button-secondary" href="https://github.com/priyanshisharma919346-del/Priya" target="_blank" rel="noopener">GitHub Profile</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Priyanshi Sharma. All rights reserved.
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    menuButton.addEventListener("click", function () {
+      navLinks.classList.toggle("open");
+    });
+    document.querySelectorAll(".nav-links a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+      });
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
